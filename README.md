@@ -6,6 +6,9 @@ This platform integrates real-time FX rate tracking, currency conversion, and pa
 
 # Key Features:
 Multi-Currency Support
+
 Competitive Exchange Rates
+
 Secure Payments
+
 User-Friendly Interface
