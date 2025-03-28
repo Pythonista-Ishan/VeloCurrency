@@ -12,3 +12,12 @@ Competitive Exchange Rates
 Secure Payments
 
 User-Friendly Interface
+
+# Changes to be made
+Update the static path for template designs,
+Update the secret key in settings.py,
+Update the API key in views.currency_exchange which fetch the live rates,
+Create your own superuser,
+Run a Postgresql database docker container (Recommended),
+Update Database settings in setting.py,
+Download Modules as required by different views
