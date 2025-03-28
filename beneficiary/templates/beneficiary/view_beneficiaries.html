@@ -1,0 +1,201 @@
+<!-- <h1>Registered Beneficiaries</h1>
+<table>
+    <tr>
+        <th>Account Name</th>
+        <th>Bank Name</th>
+        <th>IBAN</th>
+        <th>Actions</th>
+    </tr>
+    {% for beneficiary in beneficiaries %}
+    <tr>
+        <td>{{ beneficiary.account_name }}</td>
+        <td>{{ beneficiary.bank_name }}</td>
+        <td>{{ beneficiary.iban }}</td>
+        <td>
+            <a href="{% url 'edit_beneficiary' beneficiary.id %}">Edit</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'register_beneficiary' %}">Add New Beneficiary</a> -->
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- meta tags -->
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Premium HTML5 Template by Indonez">
+	<meta name="keywords" content="blockit, uikit3, indonez, handlebars, scss, javascript">
+	<meta name="author" content="Indonez">
+	<meta name="theme-color" content="#FCB42D">
+	<!-- preload assets -->
+	<link rel="preload" href="{% static 'fonts/fa-brands-400.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/fa-solid-900.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-regular.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-300.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-700.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'css/style.css' %}" as="style">
+	<link rel="preload" href="{% static 'js/vendors/uikit.min.js' %}" as="script">
+	<link rel="preload" href="{% static 'js/utilities.min.js' %}" as="script">
+	<link rel="preload" href="{% static 'js/config-theme.js' %}" as="script">
+	<!-- stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/style(registerbene).css' %}">
+	<!-- uikit -->
+	<script src="{% static 'js/vendors/uikit.min.js' %}"></script>
+	<!-- favicon -->
+	<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+	<!-- touch icon -->
+	<link rel="apple-touch-icon-precomposed" href="{% static 'img/apple-touch-icon.png' %}">
+	<title>Currency Exchange</title>
+</head>
+<body>
+    <header>
+        <div class="uk-section uk-padding-remove-vertical">
+            <nav class="uk-navbar-container uk-navbar-transparent uk-sticky" data-uk-sticky="show-on-up: true; animation: uk-animation-slide-top;">
+                <div class="uk-container" data-uk-navbar>
+                    <div class="uk-navbar-left">
+                        <a class="uk-navbar-item uk-logo" href="{% url 'profile' %}">
+                            <img src="{% static 'img/user/header-logo-Uw3Zp9.svg' %}" alt="logo" width="186" height="10">
+                        </a>
+                        <ul class="uk-navbar-nav uk-visible@m">
+                            <li><a href="{% url 'exchange_currency' %}">Exchange</a></li>
+                            <li><a href="{% url 'register_beneficiary' %}">Register Beneficiary</a></li>
+                            <li><a href="{% url 'view_beneficiaries' %}">View Beneficiaries</a></li>
+                            <li><a href="{% url 'create_payment' %}">Create Payment</a></li>
+							<li><a href="{% url 'show_payments' %}">Show Payments</a></li>
+							<li><a href="{% url 'update_profile' %}">Update Profile</a></li>
+                        </ul>
+                    </div>
+                    <div class="uk-navbar-right">
+                        <!-- Profile Icon -->
+                        <div class="profile-icon" onclick="openProfileSidebar()">
+                            <img src="{% static 'img/user.png' %}" alt="Profile" title="Profile">
+                        </div>
+
+                        <!-- Sidebar -->
+                        <div id="profile-sidebar" class="profile-sidebar">
+                            <div class="profile-header">
+                                <h2>Profile Details</h2>
+                                <span class="close-btn" onclick="closeProfileSidebar()">&times;</span>
+                            </div>
+                            <div class="profile-content">
+                                <p><strong>User ID:</strong> {{ customer.user_id }}</p>
+                                <p><strong>Name:</strong> {{ customer.name }}</p>
+                                <p><strong>Email:</strong> {{ customer.email }}</p>
+                                <p><strong>Phone Number:</strong> {{ customer.phone_number }}</p>
+								<a href="{% url 'logout' %}" class="uk-button uk-button-primary">Log Out<i class="fas uk-margin-small-left"></i></a>
+                            </div>
+                        </div>
+                        <!-- Overlay -->
+                        <div id="overlay" class="overlay" onclick="closeProfileSidebar()"></div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+	<main>
+		<div class="uk-section uk-padding-remove-vertical in-slideshow-gradient">
+			<div id="particles-js" class="uk-light in-slideshow uk-background-contain" data-src="{% static 'img/in-equity-decor-1.svg' %}" data-uk-img data-uk-slideshow>
+				<hr>
+				<div class="uk-slideshow-items">
+				</div>
+			</div>
+		</div>
+        <div class="wallet-container">
+            <h1 class="wallet-title">Registered Beneficiaries</h1>
+            <div class="table-wrapper">
+              <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                  <tr>
+                    <th style="padding: 15px; text-align: left; background-color: #f9f9f9; color: #f9a825;">Beneficiary Name</th>
+                    <th style="padding: 15px; text-align: left; background-color: #f9f9f9; color: #f9a825;">Bank Name</th>
+                    <th style="padding: 15px; text-align: left; background-color: #f9f9f9; color: #f9a825;">Bank Country</th>
+                    <th style="padding: 15px; text-align: left; background-color: #f9f9f9; color: #f9a825;">Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for beneficiary in beneficiaries %}
+                  <tr>
+                    <td style="padding: 15px; text-align: left;">{{ beneficiary.account_name }}</td>
+                    <td style="padding: 15px; text-align: left;">{{ beneficiary.bank_name }}</td>
+                    <td style="padding: 15px; text-align: left;">{{ beneficiary.bank_address }}</td>
+                    <td style="padding: 15px; text-align: left;">
+                      <a href="{% url 'edit_beneficiary' beneficiary.id %}" style="text-decoration: none; color: #000; font-size: 16px;">✏️</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+        </div>
+        <style>
+            .table-wrapper {
+                max-height: 350px; /* Adjust this to fit your content */
+                overflow-y: auto;
+                border-radius: 10px;
+                border: none;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            a:hover {
+                color: #f9a825;
+            }
+
+            .table-wrapper::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            .table-wrapper::-webkit-scrollbar-thumb {
+                background: #f9a825;
+                border-radius: 10px;
+            }
+
+            .table-wrapper::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+        </style>
+        <footer class="lower-div">
+            <div class="footer-content">
+                <div class="uk-grid uk-flex uk-flex-middle">
+					<div class="uk-width-2-3@m uk-text-small">
+						<ul class="uk-subnav uk-subnav-divider uk-visible@s" data-uk-margin="">
+							<li><a href="#">Risk disclosure</a></li>
+							<li><a href="#">Privacy policy</a></li>
+							<li><a href="#">Return policy</a></li>
+							<li><a href="#">Customer Agreement</a></li>
+							<li><a href="#">AML policy</a></li>
+						</ul>
+						<p class="copyright-text">©2024 Velocurrency. All rights reserved.</p>
+					</div>
+				</div>
+            </div>
+        </footer>
+	</main>
+    <script>
+        // Function to open the profile sidebar
+        function openProfileSidebar() {
+            document.getElementById("profile-sidebar").style.right = "0"; // Slide in
+            document.getElementById("overlay").style.display = "block"; // Show overlay
+        }
+
+        // Function to close the profile sidebar
+        function closeProfileSidebar() {
+            document.getElementById("profile-sidebar").style.right = "-700px"; // Slide out
+            document.getElementById("overlay").style.display = "none"; // Hide overlay
+        }
+    </script>
+    <script src="{% static 'js/vendors/particles.min.js' %}"></script>
+    <script src="{% static 'js/config-particles.js' %}"></script>
+	<script src="{% static 'js/utilities.min.js' %}"></script>
+	<script src="{% static 'js/config-theme.js' %}"></script>
+
+</html>

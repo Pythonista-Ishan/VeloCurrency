@@ -1,0 +1,186 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="blockit, uikit3, indonez, handlebars, scss, javascript">
+	<meta name="theme-color" content="#FCB42D">
+	<!-- preload assets -->
+	<link rel="preload" href="{% static 'fonts/fa-brands-400.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/fa-solid-900.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-regular.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-300.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-700.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'css/style.css' %}" as="style">
+	<link rel="preload" href="{% static 'js/vendors/uikit.min.js' %}" as="script">
+	<link rel="preload" href="{% static 'js/utilities.min.js' %}" as="script">
+	<link rel="preload" href="{% static 'js/config-theme.js' %}" as="script">
+	<!-- stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/style(deposit).css' %}">
+	<!-- uikit -->
+	<script src="{% static 'js/vendors/uikit.min.js' %}"></script>
+	<!-- favicon -->
+	<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+	<!-- touch icon -->
+	<link rel="apple-touch-icon-precomposed" href="{% static 'img/apple-touch-icon.png' %}">
+	<title>Velocurrency</title>
+</head>
+<body>
+    <header>
+        <div class="uk-section uk-padding-remove-vertical">
+            <nav class="uk-navbar-container uk-navbar-transparent uk-sticky" data-uk-sticky="show-on-up: true; animation: uk-animation-slide-top;">
+                <div class="uk-container" data-uk-navbar>
+                    <div class="uk-navbar-left">
+                        <a class="uk-navbar-item uk-logo" href="index.html">
+                            <img src="{% static 'img/user/header-logo-Uw3Zp9.svg' %}" alt="logo" width="186" height="10">
+                        </a>
+                        <ul class="uk-navbar-nav uk-visible@m">
+                            <li><a href="{% url 'exchange_currency' %}">Exchange</a></li>
+                            <li><a href="{% url 'register_beneficiary' %}">Register Beneficiary</a></li>
+                            <li><a href="{% url 'view_beneficiaries' %}">View Beneficiaries</a></li>
+                            <li><a href="{% url 'create_payment' %}">Create Payment</a></li>
+							<li><a href="{% url 'show_payments' %}">Show Payments</a></li>
+							<li><a href="{% url 'update_profile' %}">Update Profile</a></li>
+                        </ul>
+                    </div>
+                    <div class="uk-navbar-right">
+                        <!-- Profile Icon -->
+                        <div class="profile-icon" onclick="openProfileSidebar()">
+                            <img src="{% static 'img/user.png' %}" alt="Profile" title="Profile">
+                        </div>
+
+                        <!-- Sidebar -->
+                        <div id="profile-sidebar" class="profile-sidebar">
+                            <div class="profile-header">
+                                <h2>Profile Details</h2>
+                                <span class="close-btn" onclick="closeProfileSidebar()">&times;</span>
+                            </div>
+                            <div class="profile-content">
+                                <p><strong>User ID:</strong> {{ customer.user_id }}</p>
+                                <p><strong>Name:</strong> {{ customer.name }}</p>
+                                <p><strong>Email:</strong> {{ customer.email }}</p>
+                                <p><strong>Phone Number:</strong> {{ customer.phone_number }}</p>
+								<a href="{% url 'logout' %}" class="uk-button uk-button-primary">Log Out<i class="fas uk-margin-small-left"></i></a>
+                            </div>
+                        </div>
+                        <!-- Overlay -->
+                        <div id="overlay" class="overlay" onclick="closeProfileSidebar()"></div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+	<main>
+		<div class="uk-section uk-padding-remove-vertical in-slideshow-gradient">
+			<div id="particles-js" class="uk-light in-slideshow uk-background-contain" data-src="img/in-equity-decor-1.svg" data-uk-img data-uk-slideshow>
+				<hr>
+				<div class="uk-slideshow-items">
+				</div>
+			</div>
+		</div>
+        <div class="wallet-container">
+            <h1 class="wallet-title">Deposit to {{ currency }} Wallet</h1>
+            {% if bank_details %}
+                <div class="section">
+                    <div class="section-title">Bank Details</div>
+                    <div class="details">
+                        <div class="rowdep">
+                            <span class="labeldep">Bank Name:</span>
+                            <span class="valuedep">{{ bank_details.institution_name }}</span>
+                        </div>
+                        <div class="rowdep">
+                            <span class="labeldep">Bank Country:</span>
+                            <span class="valuedep">{{ bank_details.institution_address }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Account Details</div>
+                    <div class="details">
+                        <div class="rowdep">
+                            <span class="labeldep">Full Name:</span>
+                            <span class="valuedep">{{ bank_details.account_details.account_name }}</span>
+                            <span class="labeldep">IBAN:</span>
+                            <span class="valuedep">{{ bank_details.account_details.iban }}</span>
+                        </div>
+                        <div class="rowdep">
+                            <span class="labeldep">BIC Code:</span>
+                            <span class="valuedep">{{ bank_details.account_details.swift_bic }}</span>
+                            <span class="labeldep">Account Number:</span>
+                            <span class="valuedep">{{ bank_details.account_details.account_number }}</span>
+                        </div>
+                        <div class="rowdep">
+                            <span class="labeldep">Sort Code:</span>
+                            <span class="valuedep">{{ bank_details.account_details.sort_code }}</span>
+                            <span class="labeldep">National Clearing Code:</span>
+                            <span class="valuedep">{{ bank_details.account_details.ncc }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>Bank details not available for this currency.</p>
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-container">
+                    <div class="input-group">
+                        <label class="labelconfirm">Amount</label>
+                        <input type="number" name="amount" required placeholder="Amount">
+                    </div>
+                    <div class="input-group">
+                        <label class="labelconfirm">Reference</label>
+                        <input type="text" name="reference_number" required placeholder="Reference">
+                    </div>
+                </div>
+    
+                <div class="buttons">
+                    <span></span>
+                    <button class="uk-button uk-button-primary" type="submit">Submit Deposit</button>
+                </div>
+            </form>
+            <div class="buttons">
+                <a href="{% url 'profile' %}"><button class="cancel-button">Cancel</button></div></a>
+            </div>
+        </div>
+        <footer class="lower-div">
+            <div class="footer-content">
+                <div class="uk-grid uk-flex uk-flex-middle">
+					<div class="uk-width-2-3@m uk-text-small">
+						<ul class="uk-subnav uk-subnav-divider uk-visible@s" data-uk-margin="">
+							<li><a href="#">Risk disclosure</a></li>
+							<li><a href="#">Privacy policy</a></li>
+							<li><a href="#">Return policy</a></li>
+							<li><a href="#">Customer Agreement</a></li>
+							<li><a href="#">AML policy</a></li>
+						</ul>
+						<p class="copyright-text">©2024 Velocurrency. All rights reserved.</p>
+					</div>
+				</div>
+            </div>
+        </footer>
+	</main>
+
+    <script>
+        // Function to open the profile sidebar
+        function openProfileSidebar() {
+            document.getElementById("profile-sidebar").style.right = "0"; // Slide in
+            document.getElementById("overlay").style.display = "block"; // Show overlay
+        }
+
+        // Function to close the profile sidebar
+        function closeProfileSidebar() {
+            document.getElementById("profile-sidebar").style.right = "-700px"; // Slide out
+            document.getElementById("overlay").style.display = "none"; // Hide overlay
+        }
+    </script>
+	<script src="{% static 'js/vendors/particles.min.js' %}"></script>
+	<script src="{% static 'js/config-particles.js' %}"></script>
+	<script src="{% static 'js/utilities.min.js' %}"></script>
+	<script src="{% static 'js/config-theme.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+<!-- wallet_dashboard/templates/wallet_dashboard/wallet_detail.html -->
+<h1>{{ wallet.currency }} Wallet - Balance: {{ wallet.balance }}</h1>
+<h2>Transaction History</h2>
+<ul>
+    {% for transaction in transactions %}
+        <li>{{ transaction.description }} - {{ transaction.amount }} on {{ transaction.date }}</li>
+    {% empty %}
+        <li>No transactions found.</li>
+    {% endfor %}
+</ul>

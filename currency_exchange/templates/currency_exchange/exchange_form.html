@@ -1,0 +1,231 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- meta tags -->
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Premium HTML5 Template by Indonez">
+	<meta name="keywords" content="blockit, uikit3, indonez, handlebars, scss, javascript">
+	<meta name="author" content="Indonez">
+	<meta name="theme-color" content="#FCB42D">
+	<!-- preload assets -->
+	<link rel="preload" href="{% static 'fonts/fa-brands-400.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/fa-solid-900.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-regular.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-300.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-700.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'css/style.css' %}" as="style">
+	<link rel="preload" href="{% static 'js/vendors/uikit.min.js' %}" as="script">
+	<link rel="preload" href="{% static 'js/utilities.min.js' %}" as="script">
+	<link rel="preload" href="{% static 'js/config-theme.js' %}" as="script">
+	<!-- stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/style(exchange).css' %}">
+	<!-- uikit -->
+	<script src="{% static 'js/vendors/uikit.min.js' %}"></script>
+	<!-- favicon -->
+	<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+	<!-- touch icon -->
+	<link rel="apple-touch-icon-precomposed" href="{% static 'img/apple-touch-icon.png' %}">
+	<title>Currency Exchange</title>
+</head>
+<body>
+    <header>
+        <div class="uk-section uk-padding-remove-vertical">
+            <nav class="uk-navbar-container uk-navbar-transparent uk-sticky" data-uk-sticky="show-on-up: true; animation: uk-animation-slide-top;">
+                <div class="uk-container" data-uk-navbar>
+                    <div class="uk-navbar-left">
+                        <a class="uk-navbar-item uk-logo" href="{% url 'profile' %}">
+                            <img src="{% static 'img/user/header-logo-Uw3Zp9.svg' %}" alt="logo" width="186" height="10">
+                        </a>
+                        <ul class="uk-navbar-nav uk-visible@m">
+                            <li><a href="{% url 'exchange_currency' %}">Exchange</a></li>
+                            <li><a href="{% url 'register_beneficiary' %}">Register Beneficiary</a></li>
+                            <li><a href="{% url 'view_beneficiaries' %}">View Beneficiaries</a></li>
+                            <li><a href="{% url 'create_payment' %}">Create Payment</a></li>
+							<li><a href="{% url 'show_payments' %}">Show Payments</a></li>
+							<li><a href="{% url 'update_profile' %}">Update Profile</a></li>
+                        </ul>
+                    </div>
+                    <div class="uk-navbar-right">
+                        <!-- Profile Icon -->
+                        <div class="profile-icon" onclick="openProfileSidebar()">
+                            <img src="{% static 'img/user.png' %}" alt="Profile" title="Profile">
+                        </div>
+
+                        <!-- Sidebar -->
+                        <div id="profile-sidebar" class="profile-sidebar">
+                            <div class="profile-header">
+                                <h2>Profile Details</h2>
+                                <span class="close-btn" onclick="closeProfileSidebar()">&times;</span>
+                            </div>
+                            <div class="profile-content">
+                                <p><strong>User ID:</strong> {{ customer.user_id }}</p>
+                                <p><strong>Name:</strong> {{ customer.name }}</p>
+                                <p><strong>Email:</strong> {{ customer.email }}</p>
+                                <p><strong>Phone Number:</strong> {{ customer.phone_number }}</p>
+								<a href="{% url 'logout' %}" class="uk-button uk-button-primary">Log Out<i class="fas uk-margin-small-left"></i></a>
+                            </div>
+                        </div>
+                        <!-- Overlay -->
+                        <div id="overlay" class="overlay" onclick="closeProfileSidebar()"></div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+	<main>
+		<div class="uk-section uk-padding-remove-vertical in-slideshow-gradient">
+			<div id="particles-js" class="uk-light in-slideshow uk-background-contain" data-src="{% static 'img/in-equity-decor-1.svg' %}" data-uk-img data-uk-slideshow>
+				<hr>
+				<div class="uk-slideshow-items">
+				</div>
+			</div>
+		</div>
+        <div class="wallet-container">
+            <form method="post" action="{% url 'exchange_currency' %}">
+                {% csrf_token %}
+                <h1 class="wallet-title">Initiate an Fx Order</h1>
+                <div class="section">
+                    <label for="sell-currency">Select Sell Currency</label>
+                    <div class="dropdown">
+                        <select name="sell_currency" id="sell_currency" required onchange="updateBuyCurrency()">
+                            <option value="">Select</option>
+                            <option value="GBP">British Pound Sterling (£)</option>
+                            <option value="EUR">Euro (€)</option>
+                            <option value="USD">U.S. Dollar ($)</option>
+                            <option value="INR">Indian Rupee (₹)</option>
+                        </select>
+                    </div>
+                    <div class="balance" id="sellbalance">Balance:</div>
+                    <span id="sell_balance">--</span>
+                </div>
+
+                <div class="section">
+                    <label for="buy-currency">Select Buy Currency</label>
+                    <div class="dropdown">
+                        <select name="buy_currency" id="buy_currency" required onchange="fetchBalances()">
+                            <option value=""></option>
+                            <option value="GBP">British Pound Sterling (£)</option>
+                            <option value="EUR">Euro (€)</option>
+                            <option value="USD">U.S. Dollar ($)</option>
+                            <option value="INR">Indian Rupee (₹)</option>
+                        </select>
+                    </div>
+                    <div class="balance" id="buybalance">Balance:</div>
+                    <span id="buy_balance">--</span>
+                </div>
+                
+                <div class="section">
+                    <label for="buy-currency">Enter Sell Amount</label>
+                    <div class="text">
+                        <input type="number" min="1" name="amount" step="0.01" required placeholder="Enter Amount in Sell Currency">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}" style="color: red; animation: fade-out 5s forwards;">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                
+        
+                <div class="buttons">
+                    <span></span>
+                    <button class="uk-button uk-button-primary" type="submit">Get Rate</button>
+                </div>
+            </form>
+            <div class="buttons">
+                <a href="{% url 'profile' %}"><button class="cancel-button">Cancel</button></div></a>
+            </div>
+        </div>
+        <footer class="lower-div">
+            <div class="footer-content">
+                <div class="uk-grid uk-flex uk-flex-middle">
+					<div class="uk-width-2-3@m uk-text-small">
+						<ul class="uk-subnav uk-subnav-divider uk-visible@s" data-uk-margin="">
+							<li><a href="#">Risk disclosure</a></li>
+							<li><a href="#">Privacy policy</a></li>
+							<li><a href="#">Return policy</a></li>
+							<li><a href="#">Customer Agreement</a></li>
+							<li><a href="#">AML policy</a></li>
+						</ul>
+						<p class="copyright-text">©2024 Velocurrency. All rights reserved.</p>
+					</div>
+				</div>
+            </div>
+        </footer>
+	</main>
+    <script>
+        // Function to open the profile sidebar
+        function openProfileSidebar() {
+            document.getElementById("profile-sidebar").style.right = "0"; // Slide in
+            document.getElementById("overlay").style.display = "block"; // Show overlay
+        }
+
+        // Function to close the profile sidebar
+        function closeProfileSidebar() {
+            document.getElementById("profile-sidebar").style.right = "-700px"; // Slide out
+            document.getElementById("overlay").style.display = "none"; // Hide overlay
+        }
+        function updateBuyCurrency() {
+            const sellCurrency = document.getElementById("sell_currency").value;
+            const buyCurrencySelect = document.getElementById("buy_currency");
+        
+            // Define currencies as a dictionary
+            const currencies = {
+                GBP: "British Pound Sterling (£)",
+                EUR: "Euro (€)",
+                USD: "U.S. Dollar ($)",
+                INR: "Indian Rupee (₹)"
+            };
+        
+            // Clear current options in buy currency
+            buyCurrencySelect.innerHTML = '';
+        
+            // Populate buy currency dropdown, excluding the selected sell currency
+            for (const [symbol, name] of Object.entries(currencies)) {
+                if (symbol !== sellCurrency) {
+                    const option = document.createElement("option");
+                    option.value = symbol; // Set key as the value
+                    option.textContent = name; // Set full form as the text content
+                    buyCurrencySelect.appendChild(option);
+                }
+            }
+        
+            // Fetch balances after updating buy currency options
+            fetchBalances();
+        }
+        
+        // Function to fetch wallet balances via AJAX
+        function fetchBalances() {
+            const sellCurrency = document.getElementById("sell_currency").value;
+            const buyCurrency = document.getElementById("buy_currency").value;
+        
+            if (sellCurrency && buyCurrency) {
+                fetch(`/currency_exchange/get-wallet-balance/?sell_currency=${sellCurrency}&buy_currency=${buyCurrency}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.sell_balance !== undefined) {
+                            document.getElementById("sell_balance").textContent = data.sell_balance;
+                        }
+                        if (data.buy_balance !== undefined) {
+                            document.getElementById("buy_balance").textContent = data.buy_balance;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching wallet balances:', error);
+                    });
+            } else {
+                document.getElementById("sell_balance").textContent = "--";
+                document.getElementById("buy_balance").textContent = "--";
+            }
+        }
+    </script>
+	<script src="{% static 'js/vendors/particles.min.js' %}"></script>
+    <script src="{% static 'js/config-particles.js' %}"></script>
+	<script src="{% static 'js/utilities.min.js' %}"></script>
+	<script src="{% static 'js/config-theme.js' %}"></script>
+</body>
+
+</html>

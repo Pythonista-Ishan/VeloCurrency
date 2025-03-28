@@ -1,0 +1,108 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Premium HTML5 Template by Indonez">
+	<meta name="keywords" content="blockit, uikit3, indonez, handlebars, scss, javascript">
+	<meta name="author" content="Indonez">
+	<meta name="theme-color" content="#FCB42D">
+	<!-- preload assets -->
+	<link rel="preload" href="{% static 'fonts/fa-brands-400.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/fa-solid-900.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-regular.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-300.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-700.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'css/style.css' %}" as="style">
+	<link rel="preload" href="{% static 'js/vendors/uikit.min.js' %}" as="script">
+	<link rel="preload" href="{% static 'js/utilities.min.js' %}" as="script">
+	<link rel="preload" href="{% static 'js/config-theme.js' %}" as="script">
+	<!-- stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<!-- uikit -->
+	<script src="{% static 'js/vendors/uikit.min.js' %}"></script>
+	<!-- favicon -->
+	<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+	<!-- touch icon -->
+	<link rel="apple-touch-icon-precomposed" href="{% static 'img/apple-touch-icon.png' %}">
+	<title>Register</title>
+</head>
+
+<body>
+	<!-- page loader begin -->
+	<!-- <div class="page-loader">
+		<div></div>
+		<div></div>
+		<div></div>
+	</div> -->
+	<!-- page loader end -->
+	<main>
+		<!-- section content begin -->
+		<div class="uk-section uk-section-secondary uk-light uk-padding-remove-vertical">
+			<div class="uk-container uk-container-expand">
+				<div class="uk-grid" data-uk-height-viewport="expand: true">
+					<div class="uk-width-3-5@m uk-background-cover uk-background-center-right uk-visible@m uk-box-shadow-xlarge" style="background-image: url('{% static "img/in-signin-image.jpg" %}');">
+						
+					</div>
+					<div class="uk-width-expand@m uk-flex uk-flex-middle">
+						<div class="uk-grid uk-flex-center">
+							<div class="uk-width-3-5@m">
+								<div class="uk-text-center in-padding-horizontal@s">
+									<a class="uk-logo" href="{% url 'landing_page' %}">
+										<img src="{% static 'img/in-lazy.gif' %}" data-src="{% static 'img/user/header-logo-Uw3Zp9.svg' %}" alt="logo" width="146" height="40" data-uk-img>
+									</a>
+									<p class="uk-text-lead uk-margin-small-top uk-margin-medium-bottom">Register your account</p>
+									<!-- login form begin -->
+									<form class="uk-grid uk-form" method="post">
+										{% csrf_token %}
+										<div class="uk-margin-small uk-width-1-1 uk-inline">
+											<span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"></span>
+											<input class="uk-input uk-border-rounded" id="username" value="" type="text" name="name" placeholder="Full Name">
+										</div>
+										<div class="uk-margin-small uk-width-1-1 uk-inline">
+											<span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"></span>
+											<input class="uk-input uk-border-rounded" id="username" value="" type="email" name="email" placeholder="Email">
+										</div>
+										<div class="uk-margin-small uk-width-1-1 uk-inline">
+											<span class="uk-form-icon uk-form-icon-flip fas fa-user fa-sm"></span>
+											<input class="uk-input uk-border-rounded" id="username" value="" type="tel" name="phone_number" pattern="[0-9]{6,15}" placeholder="Phone Number">
+										</div>
+										<div class="uk-margin-small uk-width-1-1 uk-inline">
+											<span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
+											<input class="uk-input uk-border-rounded" id="password" value="" type="password" name="password" placeholder="Password" required>
+										</div>
+										<div class="uk-margin-small uk-width-1-1">
+											<button class="uk-button uk-width-1-1 uk-button-primary uk-border-rounded uk-float-left" type="submit" name="submit">Register</button>
+										</div>
+									</form>
+									<span class="uk-text-small">Already have an account? <a href="{% url 'login' %}">Login</a></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section content end -->
+	</main>
+	<!-- javascript -->
+	<script src="{% static 'js/utilities.min.js' %}"></script>
+	<script src="{% static 'js/config-theme.js' %}"></script>
+	<script>
+        // JavaScript to toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function () {
+            // Toggle the password input type
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Change eye button icon (optional)
+            this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+    </script>
+</body>
+</html>

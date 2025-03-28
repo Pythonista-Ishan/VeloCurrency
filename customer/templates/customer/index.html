@@ -1,0 +1,317 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="blockit, uikit3, indonez, handlebars, scss, javascript">
+	<meta name="theme-color" content="#FCB42D">
+	<!-- preload assets -->
+	<link rel="preload" href="{% static 'fonts/fa-brands-400.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/fa-solid-900.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-regular.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-300.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'fonts/archivo-v18-latin-700.woff2' %}" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="{% static 'css/style.css' %}" as="style">
+	<link rel="preload" href="{% static 'js/vendors/uikit.min.js' %}" as="script">
+	<link rel="preload" href="{% static 'js/utilities.min.js' %}" as="script">
+	<link rel="preload" href="{% static 'js/config-theme.js' %}" as="script">
+	<!-- stylesheet -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<!-- uikit -->
+	<script src="{% static 'js/vendors/uikit.min.js' %}"></script>
+	<!-- favicon -->
+	<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+	<!-- touch icon -->
+	<link rel="apple-touch-icon-precomposed" href="{% static 'img/apple-touch-icon.png' %}">
+	<title>Velocurrency</title>
+</head>
+
+<body>
+	<!-- page loader begin -->
+	<!-- <div class="page-loader">
+		<div></div>
+		<div></div>
+		<div></div>
+	</div> -->
+	<!-- page loader end -->
+	<!-- header begin -->
+	<header>
+		<div class="uk-section uk-padding-remove-vertical">
+			<nav class="uk-navbar-container uk-navbar-transparent" data-uk-sticky="show-on-up: true; animation: uk-animation-slide-top;">
+				<div class="uk-container" data-uk-navbar>
+					<div class="uk-navbar-left">
+						<a class="uk-navbar-item uk-logo" href="index.html">
+							<img src="{% static 'img/user/header-logo-Uw3Zp9.svg' %}" alt="logo" width="146" height="40">
+						</a>
+						<ul class="uk-navbar-nav uk-visible@m">
+							<li>Lightning-Fast Currency Exchange, Anytime, Anywhere!</li>
+						</ul>
+					</div>
+					<div class="uk-navbar-right">
+						<div class="uk-navbar-item uk-visible@m in-optional-nav">
+							<a href="{% url 'login' %}" class="uk-button uk-button-text">Log in<i class="fas fa-arrow-circle-right uk-margin-small-left"></i></a>
+							<a href="{% url 'register' %}" class="uk-button uk-button-primary">Sign up<i class="fas fa-arrow-circle-right uk-margin-small-left"></i></a>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<!-- header end -->
+	<main>
+		<!-- slideshow content begin -->
+		<div class="uk-section uk-padding-remove-vertical in-slideshow-gradient">
+			<div id="particles-js" class="uk-light in-slideshow uk-background-contain" data-src="{% static 'img/in-equity-decor-1.svg' %}" data-uk-img data-uk-slideshow="" role="region" ariaroledescription="carousel">
+				<hr>
+				<ul class="uk-slideshow-items">
+					<li class="uk-flex uk-flex-middle">
+						<div class="uk-container">
+							<div class="uk-grid-large uk-flex-middle" data-uk-grid>
+								<div class="uk-width-1-2@s in-slide-text">
+									<h1 class="uk-heading-small">One of the most <span class="in-highlight">efficient</span> trade app.</h1>
+									<p class="uk-text-lead uk-visible@m">Get the most up-to-date market data, tools, notifications, conversions, and more. — all within the same app.</p>
+								</div>
+								<div class="in-slide-img">
+									<img src="{% static 'img/in-lazy.gif' %}" data-src="{% static 'img/in-equity-slide-1.png' %}" alt="image-slide" width="652" height="746" data-uk-img>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="uk-flex uk-flex-middle">
+						<div class="uk-container">
+							<div class="uk-grid-large uk-flex-middle" data-uk-grid>
+								<div class="uk-width-1-2@s in-slide-text">
+									<h1 class="uk-heading-small">Reach out to new trading <span class="in-highlight">experience</span>.</h1>
+									<p class="uk-text-lead uk-visible@m">Extend your trading endeavours beyond the confines of your trading account and take them global.</p>
+								</div>
+								<div class="in-slide-img">
+									<img src="{% static 'img/in-lazy.gif' %}" data-src="{% static 'img/in-equity-slide-2.png' %}" alt="image-slide" width="652" height="746" data-uk-img>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div class="uk-container">
+					<div class="uk-position-relative" data-uk-grid>
+						<ul class="uk-slideshow-nav uk-dotnav uk-position-bottom-right uk-flex uk-flex-middle"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section content end -->
+		<!-- section content begin -->
+		<div class="uk-section in-equity-2 uk-background-contain uk-background-center" data-src="{% static 'img/in-equity-2-bg.png' %}" data-uk-img>
+			<div class="uk-container uk-margin-top">
+				<div class="uk-grid uk-flex uk-flex-center">
+					<div class="uk-width-2xlarge@m uk-text-center">
+						<span class="uk-label uk-label-warning">Fast execution, low latency<i class="fas fa-arrow-right fa-xs uk-margin-small-left"></i></span>
+						<h1 class="uk-margin-top">Your premium choice for trading currencies online</h1>
+						<p class="uk-text-lead uk-margin-medium-top">Harness the power of advanced technology to make quicker, smarter, and more precise decisions on CFD currency pairs and optimize trading strategies.</p>
+					</div>
+					<div class="uk-width-3-4@m uk-margin-medium-top">
+						<img class="uk-align-center" src="{% static 'img/in-lazy.gif' %}" data-src="{% static 'img/in-equity-2-img.png' %}" alt="image" width="758" height="334" data-uk-img>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section content end -->
+		<!-- section content begin -->
+		<div class="uk-section in-equity-3 in-offset-top-20">
+			<div class="uk-container uk-margin-large-bottom">
+				<div class="uk-grid uk-flex uk-flex-middle">
+					<div class="uk-width-expand@m">
+						<h1 class="uk-margin-small-bottom">Tight spreads and <span class="in-highlight">ultra-fast</span> execution</h1>
+						<h3 class="uk-margin-top uk-text-warning">Best market prices available so you can receive excellent conditions.</h3>
+						<hr class="uk-margin-medium-top uk-margin-medium-bottom">
+						<ul class="uk-list in-list-check">
+							<li>Negative balance protection</li>
+							<li>Segregated and supervised client funds</li>
+							<li>Quick deposit & fast withdrawal</li>
+						</ul>
+					</div>
+					<div class="uk-width-2xlarge uk-flex uk-flex-right uk-flex-center@s">
+						<div class="uk-card uk-card-body uk-card-default uk-border-rounded in-margin-top-60@s">
+							<div id="tradingview-widget">
+								<div style="width: 100%; height: 361px;">
+									<style>
+										.tradingview-widget-copyright {
+											font-size: 13px !important;
+											line-height: 32px !important;
+											text-align: center !important;
+											vertical-align: middle !important;
+											/* @mixin sf-pro-display-font; */
+											font-family: -apple-system, BlinkMacSystemFont, 'Trebuchet MS', Roboto, Ubuntu, sans-serif !important;
+											color: #B2B5BE !important;
+										}
+								
+										.tradingview-widget-copyright .blue-text {
+											color: #2962FF !important;
+										}
+								
+										.tradingview-widget-copyright a {
+											text-decoration: none !important;
+											color: #B2B5BE !important;
+										}
+								
+										.tradingview-widget-copyright a:visited {
+											color: #B2B5BE !important;
+										}
+								
+										.tradingview-widget-copyright a:hover .blue-text {
+											color: #1E53E5 !important;
+										}
+								
+										.tradingview-widget-copyright a:active .blue-text {
+											color: #1848CC !important;
+										}
+								
+										.tradingview-widget-copyright a:visited .blue-text {
+											color: #2962FF !important;
+										}
+									</style>
+									<iframe scrolling="no" allowtransparency="true" frameborder="0" src="https://www.tradingview-widget.com/embed-widget/market-overview/?locale=en#%7B%22colorTheme%22%3A%22light%22%2C%22dateRange%22%3A%221D%22%2C%22showChart%22%3Afalse%2C%22width%22%3A%22100%25%22%2C%22height%22%3A361%2C%22largeChartUrl%22%3A%22%22%2C%22isTransparent%22%3Atrue%2C%22showSymbolLogo%22%3Atrue%2C%22showFloatingTooltip%22%3Afalse%2C%22plotLineColorGrowing%22%3A%22rgba(41%2C%2098%2C%20255%2C%201)%22%2C%22plotLineColorFalling%22%3A%22rgba(41%2C%2098%2C%20255%2C%201)%22%2C%22gridLineColor%22%3A%22rgba(240%2C%20243%2C%20250%2C%200)%22%2C%22scaleFontColor%22%3A%22rgba(120%2C%20123%2C%20134%2C%201)%22%2C%22belowLineFillColorGrowing%22%3A%22rgba(41%2C%2098%2C%20255%2C%200.12)%22%2C%22belowLineFillColorFalling%22%3A%22rgba(41%2C%2098%2C%20255%2C%200.12)%22%2C%22belowLineFillColorGrowingBottom%22%3A%22rgba(41%2C%2098%2C%20255%2C%200)%22%2C%22belowLineFillColorFallingBottom%22%3A%22rgba(41%2C%2098%2C%20255%2C%200)%22%2C%22symbolActiveColor%22%3A%22rgba(41%2C%2098%2C%20255%2C%200.10)%22%2C%22tabs%22%3A%5B%7B%22title%22%3A%22Instruments%22%2C%22symbols%22%3A%5B%7B%22s%22%3A%22FX%3AEURUSD%22%7D%2C%7B%22s%22%3A%22FX%3AGBPUSD%22%7D%2C%7B%22s%22%3A%22FX%3AUSDJPY%22%7D%2C%7B%22s%22%3A%22FX%3AUSDCHF%22%7D%2C%7B%22s%22%3A%22FX%3AAUDUSD%22%7D%2C%7B%22s%22%3A%22FX%3AUSDCAD%22%7D%5D%2C%22originalTitle%22%3A%22Instruments%22%7D%5D%2C%22utm_source%22%3A%22%22%2C%22utm_medium%22%3A%22widget%22%2C%22utm_campaign%22%3A%22market-overview%22%2C%22page-uri%22%3A%22__NHTTP__%22%7D" title="market overview TradingView widget" lang="en" style="user-select: none; box-sizing: border-box; display: block; height: 100%; width: 100%;">
+									</iframe>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section content end -->
+		<!-- section content begin -->
+		<div class="uk-section in-equity-4">
+			<div class="uk-container uk-margin-top uk-margin-medium-bottom">
+				<div class="uk-grid uk-child-width-1-2@m in-testimonial-2" data-uk-grid>
+					<div class="uk-width-1-1@m uk-text-center">
+						<h1>Customer feedback drives our <span class="in-highlight">success</span></h1>
+					</div>
+					<div>
+						<div class="uk-background-contain uk-background-top-left" data-src="{% static 'img/in-equity-4-blob-1.svg' %}" data-uk-img>
+							<div class="uk-flex uk-flex-middle">
+								<div class="uk-margin-right">
+									<div class="uk-background-primary uk-border-pill">
+										<img class="uk-align-center uk-border-pill" src="{% static 'img/in-lazy.gif' %}" data-src="{% static 'img/blockit/in-team-1.png' %}" alt="client-1" width="100" height="100" data-uk-img>
+									</div>
+								</div>
+								<div>
+									<h5 class="uk-margin-remove-bottom">Angela Nannenhorn</h5>
+									<p class="uk-text-muted uk-margin-remove-top">from United Kingdom</p>
+								</div>
+							</div>
+							<blockquote>
+								<p>Velocurrency made my international payments a breeze. Highly recommend!</p>
+							</blockquote>
+						</div>
+					</div>
+					<div>
+						<div class="uk-background-contain uk-background-top-left" data-src="{% static 'img/in-equity-4-blob-2.svg' %}" data-uk-img="">
+							<div class="uk-flex uk-flex-middle">
+								<div class="uk-margin-right">
+									<div class="uk-background-primary uk-border-pill">
+										<img class="uk-align-center uk-border-pill" src="{% static 'img/in-lazy.gif'%}" data-src="{% static 'img/blockit/in-team-8.png' %}" alt="client-2" width="100" height="100" data-uk-img>
+									</div>
+								</div>
+								<div>
+									<h5 class="uk-margin-remove-bottom">Wade Palmer</h5>
+									<p class="uk-text-muted uk-margin-remove-top">from Germany</p>
+								</div>
+							</div>
+							<blockquote>
+								<p>One of the best FX platform, I have been using! their trading conditions are excellent</p>
+							</blockquote>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section content end -->
+		<!-- section content begin -->
+		<div class="uk-section uk-section-primary uk-preserve-color in-equity-6 uk-background-contain uk-background-center" data-src="{% static 'img/in-equity-decor-2.svg' %}" data-uk-img>
+			<div class="uk-container uk-margin-small-bottom">
+				<div class="uk-grid uk-flex uk-flex-center">
+					<div class="uk-width-2xlarge@m uk-text-center">
+						<h1>Ready to get started?</h1>
+						<p class="uk-text-lead">Global access to financial markets from a single account</p>
+					</div>
+					<div class="uk-width-3-4@m uk-margin-medium-top">
+						<div class="uk-flex uk-flex-center uk-flex-middle button-app">
+							<div>
+								<a href="#" class="uk-button uk-button-secondary uk-border-rounded">Open your account<i class="fas fa-arrow-circle-right uk-margin-small-left"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- section content end -->
+	</main>
+	<!-- footer begin -->
+	<footer>
+		<div class="uk-section">
+			<div class="uk-container uk-margin-top">
+				<div class="uk-grid">
+					<div class="uk-width-2-3@m">
+						<div class="uk-child-width-1-2@s uk-child-width-1-3@m" data-uk-grid="">
+							<div>
+								<h5>Instruments</h5>
+								<ul class="uk-list uk-link-text">
+									<li><a href="#">Stock</a></li>
+									<li><a href="#">Indexes</a></li>
+									<li><a href="#">Currencies</a></li>
+									<li><a href="#">Metals<span class="uk-label uk-margin-small-left in-label-small">Popular</span></a></li>
+									<li><a href="#">Oil and gas</a></li>
+									<li><a href="#">Cryptocurrencies<span class="uk-label uk-margin-small-left in-label-small">Popular</span></a></li>
+								</ul>
+							</div>
+							<div>
+								<h5>Analytics</h5>
+								<ul class="uk-list uk-link-text">
+									<li><a href="#">World Markets</a></li>
+									<li><a href="#">Trading Central<span class="uk-label uk-margin-small-left in-label-small">New</span></a></li>
+									<li><a href="#">Forex charts online</a></li>
+									<li><a href="#">Market calendar</a></li>
+									<li><a href="#">Central banks<span class="uk-label uk-margin-small-left in-label-small">New</span></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="uk-width-1-3@m uk-flex uk-flex-right@m">
+						<!-- social media begin -->
+						<div class="uk-flex uk-flex-column social-media-list">
+							<div><a href="https://www.facebook.com/share/1BAx66GhTZ/?mibextid=qi2Omg" class="color-facebook text-decoration-none"><i class="fab fa-facebook-square"></i> Facebook</a></div>
+							<div><a href="https://twitter.com/X_psych_X" class="color-twitter text-decoration-none"><i class="fab fa-twitter"></i> Twitter</a></div>
+							<div><a href="https://www.instagram.com/_alpha.py_" class="color-instagram text-decoration-none"><i class="fab fa-instagram"></i> Instagram</a></div>
+						</div>
+						<!-- social media end -->
+					</div>
+				</div>
+			</div>
+			<hr class="uk-margin-large">
+			<div class="uk-container">
+				<div class="uk-grid uk-flex uk-flex-middle">
+					<div class="uk-width-2-3@m uk-text-small">
+						<p class="copyright-text">©2024 Velocurrency. All rights reserved.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- footer end -->
+	<!-- to top begin -->
+	<a href="#" class="to-top uk-visible@m" data-uk-scroll>
+		Top<i class="fas fa-chevron-up" ></i>
+	</a>
+	<!-- to top end -->
+	<!-- javascript -->
+	<script src="{% static 'js/vendors/tradingview-widget.min.js' %}"></script>
+	<script src="{% static 'js/vendors/particles.min.js' %}"></script>
+	<script src="{% static 'js/config-particles.js' %}"></script>
+	<script src="{% static 'js/utilities.min.js' %}"></script>
+	<script src="{% static 'js/config-theme.js' %}"></script>
+</body>
+
+
+</html>
